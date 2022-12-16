@@ -4,8 +4,8 @@ import { Button } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import IconButton from '@mui/material/IconButton';
 import LightModeIcon from '@mui/icons-material/LightModeOutlined';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { ethers } from 'ethers'
 
 const Container = styled.div`
     position: relative;
@@ -97,17 +97,62 @@ const Container = styled.div`
     }
 `;
 
+
 function Header({theme, setTheme}) {
 
     const themeToggler = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
-    
+
+    const [errorMessage, setErrorMessage] = useState(null);
+	const [defaultAccount, setDefaultAccount] = useState(null);
+	const [userBalance, setUserBalance] = useState(null);
+    const [provider, setProvider] = useState(null);
+
+	const connectWalletHandler = async () => {
+		if (window.ethereum && defaultAccount == null) {
+			// set ethers provider
+            let provider = new ethers.providers.Web3Provider(window.ethereum)
+			// connect to metamask
+			window.ethereum.request({ method: 'eth_requestAccounts'})
+			.then(result => {
+				setDefaultAccount(result[0]);
+			})
+			.catch(error => {
+				setErrorMessage(error.message);
+			});
+            
+            const chainId = await provider.getNetwork()
+
+		} else if (!window.ethereum){
+			console.log('Need to install MetaMask');
+			setErrorMessage('Please install MetaMask browser extension to interact');
+		}
+        else if(window.ethereum && defaultAccount != null) {
+        }
+	}
+
+    const accountChangedHandler = (newAccount) => {
+        getBalances()
+		setDefaultAccount(newAccount[0]);
+	}
+
+    const networkChangedHandler = async(chainId) => {
+        let provider = new ethers.providers.Web3Provider(window.ethereum)
+		provider.getNetwork().then(result => {
+            console.log(result)
+        })  
+	}
+
+    window.ethereum.on('accountsChanged', accountChangedHandler)
+
+    window.ethereum.on('chainChanged', networkChangedHandler)
+
     return (
         <Container>
             <img className='happy' src={happy}></img>
             <div className='button-div'>
-                <Button className='connect-button'><div className='button-text'> CONNECT WALLET </div></Button>
+                <Button className='connect-button' onClick={connectWalletHandler}><div className='button-text'> {defaultAccount != null ? defaultAccount.substring(0,6) + "..." + defaultAccount.substring(defaultAccount.length -6) : "CONNECT WALLET"} </div></Button>
                     { theme == "dark" ? 
                         <IconButton className='theme-button-dark' onClick={themeToggler}>
                             <LightModeIcon/>
