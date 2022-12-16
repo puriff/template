@@ -1,5 +1,6 @@
 import theme from './i.js';
 import Header from './Header.js';
+import Main from './Main.js';
 import { useEffect, useState } from 'react';
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "./theme.js";
@@ -23,6 +24,7 @@ function App() {
       <GlobalStyles />
       <Container>
         <Header theme={theme} setTheme={setTheme}/>
+        <Main/>
       </Container>
     </ThemeProvider>
   );

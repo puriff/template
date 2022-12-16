@@ -97,7 +97,6 @@ const Container = styled.div`
     }
 `;
 
-
 function Header({theme, setTheme}) {
 
     const themeToggler = () => {
@@ -121,8 +120,6 @@ function Header({theme, setTheme}) {
 			.catch(error => {
 				setErrorMessage(error.message);
 			});
-            
-            const chainId = await provider.getNetwork()
 
 		} else if (!window.ethereum){
 			console.log('Need to install MetaMask');
@@ -133,7 +130,6 @@ function Header({theme, setTheme}) {
 	}
 
     const accountChangedHandler = (newAccount) => {
-        getBalances()
 		setDefaultAccount(newAccount[0]);
 	}
 
