@@ -9,7 +9,6 @@ import { ethers } from 'ethers'
 
 const Container = styled.div`
     position: relative;
-    background: ${(props) => props.theme.header};
     width: 100%;
     height: 15%;
     display: flex;
@@ -105,8 +104,6 @@ function Header({theme, setTheme}) {
 
     const [errorMessage, setErrorMessage] = useState(null);
 	const [defaultAccount, setDefaultAccount] = useState(null);
-	const [userBalance, setUserBalance] = useState(null);
-    const [provider, setProvider] = useState(null);
 
 	const connectWalletHandler = async () => {
 		if (window.ethereum && defaultAccount == null) {
