@@ -3,13 +3,13 @@ import Header from './Header.js';
 import Main from './Main.js';
 import { useEffect, useState } from 'react';
 import styled, { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, GlobalStyles } from "./theme.js";
+import { lightTheme, darkTheme } from "./theme.js";
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background: ${(props) => props.theme.background};
-  overflow: auto;
+  overflow: hidden;
 `;
 
 function App() {
@@ -21,7 +21,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <GlobalStyles />
       <Container>
         <Header theme={theme} setTheme={setTheme}/>
         <Main/>

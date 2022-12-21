@@ -1,5 +1,3 @@
-import { createGlobalStyle } from "styled-components";
-
 export const lightTheme = {
     background: '#d2d3db',
     header: '#484b6a',
@@ -23,9 +21,3 @@ export const darkTheme = {
     search_cursor: '#d2d3db',
     chain_name: '#d2d3db'
 };
-
-export const GlobalStyles = createGlobalStyle`
-	body {
-		background-color: ${(props) => props.theme.body};
-	}
-`;
