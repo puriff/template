@@ -100,7 +100,7 @@ const Container = styled.div`
                 }
 
                 .chain-name {
-                  color: white;
+                  color: ${(props) => props.theme.chain_name};
                   position: relative;
                   height: fit-content;
                   width: fit-content;
