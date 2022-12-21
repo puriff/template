@@ -1,17 +1,25 @@
 import { createGlobalStyle } from "styled-components";
 
 export const lightTheme = {
-    background: '#F9F9F9',
-    header: '#161615',
-    content_div: 'white',
+    background: '#d2d3db',
+    header: '#484b6a',
+    content_div: '#e4e5f1',
+    column_background: '#9394a5',
+    balance_background: '#e4e5f1',
+    usdc_blue: '#2775CA',
+    balance: '#484b6a',
+    search_cursor: 'black'
 };
 
 export const darkTheme = {
     background: '#161615',
-    header: 'rgb(55,55,55)',
+    header: 'transparent',
     content_div: '#1C1C1B',
-    dark_grey: '#282829',
-    light_grey: 'rgb(55,55,55)'
+    column_background: '#282829',
+    balance_background: '#1C1C1B',
+    usdc_blue: '#2775CA',
+    balance: '#F9F9F9',
+    search_cursor: 'white'
 };
 
 export const GlobalStyles = createGlobalStyle`

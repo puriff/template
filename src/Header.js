@@ -14,6 +14,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background: ${(props) => props.theme.header};
 
     .happy {
         position: absolute;
@@ -24,16 +25,49 @@ const Container = styled.div`
     .button-div {
         position: absolute;
         right: 1%;
-        width: 20%;
+        width: 40%;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
 
+        .links-button {
+            width: fit-content;
+            height: fit-content;
+            margin-right: 10px;
+            border-radius: 15px;
+            color: white;
+            font-size: 14px;
+            
+            .button-text {
+                position: relative;
+                text-decoration: none;
+
+                ::before {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 1px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: white;
+                    transform: scaleX(0);
+                    transition: transform 0.2s ease;
+                  }
+                
+                  :hover::before {
+                    transform: scaleX(1);
+                  }
+            }
+        }
+
         .connect-button {
-            width: 70%;
+            width: fit-content;
             height: 60%;
             margin-right: 10px;
+            margin-left: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
             border-radius: 15px;
             color: white;
             border: 1px white solid;
@@ -68,7 +102,7 @@ const Container = styled.div`
             background: transparent;
             color: white;
             font-size: 24px;
-            border: 1px solid white;    
+            border: 1px solid white;  
 
             :hover {
                 background: white;
@@ -97,6 +131,15 @@ const Container = styled.div`
 `;
 
 function Header({theme, setTheme}) {
+
+    let links = [
+        {   label: "Twitter",
+            link: "https://twitter.com/home"},
+        {   label: "Chart",
+            link: "https://www.tradingview.com/chart/?symbol=BINANCE%3ABTCUSDT"},
+        {   label: "Uniswap",
+            link: "https://app.uniswap.org/#/swap"},
+    ]
 
     const themeToggler = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
@@ -137,6 +180,11 @@ function Header({theme, setTheme}) {
         })  
 	}
 
+    function openLink(link) {
+        window.open(link, "_blank")
+    }
+    
+
     window.ethereum.on('accountsChanged', accountChangedHandler)
 
     window.ethereum.on('chainChanged', networkChangedHandler)
@@ -145,6 +193,9 @@ function Header({theme, setTheme}) {
         <Container>
             <img className='happy' src={happy}></img>
             <div className='button-div'>
+                {links.map((item, index) => {
+                    return <Button className='links-button' onClick={() => openLink(item.link)}> <div className='button-text'>{item.label}</div> </Button>
+                })}
                 <Button className='connect-button' onClick={connectWalletHandler}><div className='button-text'> {defaultAccount != null ? defaultAccount.substring(0,6) + "..." + defaultAccount.substring(defaultAccount.length -6) : "CONNECT WALLET"} </div></Button>
                     { theme == "dark" ? 
                         <IconButton className='theme-button-dark' onClick={themeToggler}>

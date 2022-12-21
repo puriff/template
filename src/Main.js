@@ -53,7 +53,7 @@ const Container = styled.div`
           }
 
           .MuiInputBase-root {
-            color: white;
+            color: ${(props) => props.theme.search_cursor};
             
             :after {
                 border-color: white;
@@ -76,7 +76,7 @@ const Container = styled.div`
               width: 33.33%;
               height: 95%;
               border-radius: 15px;
-              background: ${(props) => props.theme.dark_grey};  
+              background: ${(props) => props.theme.column_background};  
               display: flex;
               justify-content: center;
               align-items: center;
@@ -91,6 +91,12 @@ const Container = styled.div`
                   position: relative;
                   width: 50%;
                   margin-top: 5%;
+                  outline: 2px solid ${(props) => props.theme.usdc_blue};
+                  border-radius: 50%;
+
+                  :hover {
+                    box-shadow: 0px 0px 15px 1px ${(props) => props.theme.usdc_blue};
+                  }
                 }
 
                 .chain-name {
@@ -111,15 +117,14 @@ const Container = styled.div`
                   width: 100%;
                   display: flex;
                   align-items: center;
-                  outline: 2px solid #2775CA;
+                  outline: 2px solid ${(props) => props.theme.usdc_blue};
                   border-radius: 50px;
-                  background: #161615;
+                  background: ${(props) => props.theme.balance_background};
                   margin-bottom: 5%;
                   
                   :hover {
-                    box-shadow: 0px 0px 15px 1px #2775CA;
+                    box-shadow: 0px 0px 15px 1px ${(props) => props.theme.usdc_blue};
                   }
-
 
                   .usdc-logo {
                     position: relative;
@@ -130,22 +135,16 @@ const Container = styled.div`
                     text-align: right;
                     position: relative;
                     font-size: 28px;
-                    color: #F9F9F9; 
+                    color: ${(props) => props.theme.balance}; 
                     cursor: default;          
                     width: 100%;
                     margin-right: 10%;               
                   }
                 }
-
-              }
-
-              
+              } 
             }
         }
-
-      }
-
-      
+      }    
   }
 `;
 
@@ -226,14 +225,14 @@ function Main() {
                 <div className="content-box">
                   <div className="search-div">
                       <TextField className="search-bar" variant="outlined" label="Enter address"
-                                  color="warning"
+                                  color="primary"
                                   focused
                                   value= {address}
                                   onChange= {(e) => setAddress(e.target.value)}
                                   InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
-                                          <IconButton color="warning"
+                                          <IconButton color="primary"
                                             onClick={() => getCrosschainBalances()}
                                           >
                                               <SearchIcon />
