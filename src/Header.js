@@ -391,7 +391,8 @@ function Header({theme, setTheme}) {
                 PaperProps={{
 
                     sx: {
-                      width: '75%'
+                      width: '75%',
+                      background: "#161615"
                     }
                   }}            
                 >

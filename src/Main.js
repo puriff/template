@@ -13,21 +13,15 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
 
-  .button {
-        height: 50%;
-        width: 50%;
-        position: relative;
-        top: 10%;
-  }
-
   .main-div {
       height: 70%;
       width: 70%;
       position: relative;
-      top: 5%;
+      margin-top: 5%;
       display: flex;
       justify-content: center;
       align-items: center;
+
 
       .content-box {
         height: 100%;
@@ -39,10 +33,10 @@ const Container = styled.div`
         border-radius: 15px;   
         
       .search-div {
+        position: relative;
           width: 60%;
           margin: auto; 
           display: flex;
-          position: relative;
           margin-top: 2%;
           margin-bottom: 1%;
 
@@ -84,7 +78,7 @@ const Container = styled.div`
               .chain-div {
                 position: relative;
                 width: 80%;
-                height: 80%;
+                height: 90%;
                 text-align: center;
                 
                 .chain-logo {
@@ -112,15 +106,14 @@ const Container = styled.div`
 
                 .chain-balance {
                   position: absolute;
-                  bottom: 0;
                   height: 20%;
                   width: 100%;
                   display: flex;
+                  bottom: 5%;
                   align-items: center;
                   outline: 2px solid ${(props) => props.theme.usdc_blue};
                   border-radius: 50px;
                   background: ${(props) => props.theme.balance_background};
-                  margin-bottom: 5%;
                   
                   :hover {
                     box-shadow: 0px 0px 15px 1px ${(props) => props.theme.usdc_blue};
@@ -145,6 +138,93 @@ const Container = styled.div`
             }
         }
       }    
+  }
+
+  @media only screen and (max-width: 768px) {      
+      .main-div {
+        width: 90%;
+      }
+      .content-box {
+        .cards-div {
+          .column {
+            .chain-div {
+              .chain-balance {
+                height: 15% !important;
+                .balance {
+                  font-size: 18px !important;
+                }
+              }
+            }
+          }
+        }
+      }
+  }
+  @media only screen and (max-width: 320px) {
+    position: absolute;
+    overflow: hidden;
+    height: fit-content;
+
+    .main-div {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;  
+      margin-bottom: 10%;
+
+
+      .content-box {
+        height: fit-content;
+        
+        
+        .search-div {
+          margin-top: 5%;
+          width: 90%;
+        }
+
+        .cards-div {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: fit-content;
+
+          .column {
+            margin-top: 2.5%;
+            margin-bottom: 2.5%;
+            width: 90%;
+            height: 35vh;
+            .chain-div {
+              
+              .chain-logo {
+                margin-top: 0%;
+              }
+
+              .chain-name {
+                
+              }
+
+              .chain-balance {
+                margin-top: 15%;
+
+                :hover {
+                  box-shadow: 0px 0px 15px 1px ${(props) => props.theme.usdc_blue};
+                }
+
+                .usdc-logo {
+                  position: relative;
+                  height: 100%;
+                }
+
+                .balance {
+                  font-size: 16px;             
+                }
+              }
+            }
+          } 
+          }
+        }
+      }
+    }
   }
 `;
 
